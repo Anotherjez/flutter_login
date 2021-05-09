@@ -368,7 +368,7 @@ class _LoginCard extends StatefulWidget {
 class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  final _emailFocusNode = FocusNode();
+  final _nameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   final _confirmPasswordFocusNode = FocusNode();
 
@@ -460,7 +460,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
   @override
   void dispose() {
     _loadingController.removeStatusListener(handleLoadingAnimationStatus);
-    _emailFocusNode.dispose();
+    _nameFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
 
@@ -589,9 +589,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       prefixIcon: Icon(FontAwesomeIcons.building),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
-      onFieldSubmitted: (value) {
-        FocusScope.of(context).requestFocus(_emailFocusNode);
-      },
+      onFieldSubmitted: (value) => _submit(),
       validator: widget.emailValidator,
       onSaved: (value) => auth.email = value!,
     );
@@ -608,7 +606,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      focusNode: _emailFocusNode,
+      // focusNode: _emailFocusNode,
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(_passwordFocusNode);
       },
@@ -654,7 +652,10 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       controller: _confirmPassController,
       textInputAction: TextInputAction.done,
       focusNode: _confirmPasswordFocusNode,
-      onFieldSubmitted: (value) => _submit(),
+      // onFieldSubmitted: (value) => _submit(),
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(_nameFocusNode);
+      },
       validator: auth.isSignup
           ? (value) {
               if (value != _passController!.text) {
