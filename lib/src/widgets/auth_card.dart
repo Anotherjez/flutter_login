@@ -368,10 +368,12 @@ class _LoginCard extends StatefulWidget {
 class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
+  final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   final _confirmPasswordFocusNode = FocusNode();
 
   TextEditingController? _nameController;
+  TextEditingController? _emailController;
   TextEditingController? _passController;
   TextEditingController? _confirmPassController;
 
@@ -400,7 +402,8 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     super.initState();
 
     final auth = Provider.of<Auth>(context, listen: false);
-    _nameController = TextEditingController(text: auth.email);
+    _nameController = TextEditingController(text: auth.name);
+    _emailController = TextEditingController(text: auth.email);
     _passController = TextEditingController(text: auth.password);
     _confirmPassController = TextEditingController(text: auth.confirmPassword);
 
@@ -457,6 +460,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
   @override
   void dispose() {
     _loadingController.removeStatusListener(handleLoadingAnimationStatus);
+    _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
 
@@ -501,12 +505,13 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
 
     if (auth.isLogin) {
       error = await auth.onLogin!(LoginData(
-        name: auth.email,
+        email: auth.email,
         password: auth.password,
       ));
     } else {
       error = await auth.onSignup!(LoginData(
-        name: auth.email,
+        email: auth.email,
+        name: auth.name,
         password: auth.password,
       ));
     }
@@ -580,10 +585,30 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       loadingController: _loadingController,
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.usernameHint,
+      autofillHints: [AutofillHints.givenName],
+      prefixIcon: Icon(FontAwesomeIcons.user),
+      keyboardType: TextInputType.name,
+      textInputAction: TextInputAction.next,
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(_emailFocusNode);
+      },
+      validator: widget.emailValidator,
+      onSaved: (value) => auth.email = value!,
+    );
+  }
+
+  Widget _buildEmailField(double width, LoginMessages messages, Auth auth) {
+    return AnimatedTextFormField(
+      controller: _emailController,
+      width: width,
+      loadingController: _loadingController,
+      interval: _nameTextFieldLoadingAnimationInterval,
+      labelText: messages.usernameHint,
       autofillHints: [AutofillHints.username],
       prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
+      focusNode: _emailFocusNode,
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(_passwordFocusNode);
       },

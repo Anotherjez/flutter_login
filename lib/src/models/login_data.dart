@@ -1,23 +1,27 @@
 import 'package:quiver/core.dart';
 
 class LoginData {
+  final String email;
   final String name;
   final String password;
 
   LoginData({
-    required this.name,
+    required this.email,
+    this.name = '',
     required this.password,
   });
 
   @override
   String toString() {
-    return '$runtimeType($name, $password)';
+    return '$runtimeType($email, $name, $password)';
   }
 
   @override
   bool operator ==(Object other) {
     if (other is LoginData) {
-      return name == other.name && password == other.password;
+      return email == other.email &&
+          name == other.name &&
+          password == other.password;
     }
     return false;
   }
