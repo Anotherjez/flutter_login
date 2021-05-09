@@ -590,7 +590,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) => _submit(),
-      validator: widget.emailValidator,
       onSaved: (value) => auth.email = value!,
     );
   }
