@@ -24,10 +24,10 @@ final mockCallback = MockCallback();
 List<LoginData> stubCallback(MockCallback mockCallback) {
   reset(mockCallback);
 
-  final user = LoginData(name: 'near@gmail.com', password: '12345');
-  final invalidUser = LoginData(name: 'not.exists@gmail.com', password: '');
+  final user = LoginData(email: 'near@gmail.com', password: '12345');
+  final invalidUser = LoginData(email: 'not.exists@gmail.com', password: '');
 
-  when(mockCallback.emailValidator(user.name)).thenReturn(null);
+  when(mockCallback.emailValidator(user.email)).thenReturn(null);
   when(mockCallback.emailValidator('invalid-name')).thenReturn('Invalid!');
 
   when(mockCallback.passwordValidator(user.password)).thenReturn(null);
