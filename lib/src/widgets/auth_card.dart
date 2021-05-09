@@ -586,7 +586,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.usernameHint,
       autofillHints: [AutofillHints.givenName],
-      prefixIcon: Icon(FontAwesomeIcons.user),
+      prefixIcon: Icon(FontAwesomeIcons.building),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) {
@@ -605,7 +605,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.emailHint,
       autofillHints: [AutofillHints.username],
-      prefixIcon: Icon(FontAwesomeIcons.building),
+      prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       focusNode: _emailFocusNode,
