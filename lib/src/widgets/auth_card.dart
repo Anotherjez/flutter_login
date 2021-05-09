@@ -585,14 +585,14 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       loadingController: _loadingController,
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.usernameHint,
-      autofillHints: [AutofillHints.givenName],
+      autofillHints: [AutofillHints.name],
       prefixIcon: Icon(FontAwesomeIcons.building),
       inertiaController: _postSwitchAuthController,
       inertiaDirection: TextFieldInertiaDirection.right,
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) => _submit(),
-      onSaved: (value) => auth.email = value!,
+      onSaved: (value) => auth.name = value!,
     );
   }
 
