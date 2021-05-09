@@ -777,7 +777,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _buildNameField(textFieldWidth, messages, auth),
+                _buildEmailField(textFieldWidth, messages, auth),
                 SizedBox(height: 20),
                 _buildPasswordField(textFieldWidth, messages, auth),
                 SizedBox(height: 10),
@@ -798,7 +798,13 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               vertical: 10,
             ),
             onExpandCompleted: () => _postSwitchAuthController.forward(),
-            child: _buildConfirmPasswordField(textFieldWidth, messages, auth),
+            child: Column(
+              children: [
+                _buildConfirmPasswordField(textFieldWidth, messages, auth),
+                SizedBox(height: 10),
+                _buildNameField(textFieldWidth, messages, auth),
+              ],
+            ),
           ),
           Container(
             padding: Paddings.fromRBL(cardPadding),
