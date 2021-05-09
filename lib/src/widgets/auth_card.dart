@@ -587,6 +587,8 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       labelText: messages.usernameHint,
       autofillHints: [AutofillHints.givenName],
       prefixIcon: Icon(FontAwesomeIcons.building),
+      inertiaController: _postSwitchAuthController,
+      inertiaDirection: TextFieldInertiaDirection.right,
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) => _submit(),
@@ -801,7 +803,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             child: Column(
               children: [
                 _buildConfirmPasswordField(textFieldWidth, messages, auth),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 _buildNameField(textFieldWidth, messages, auth),
               ],
             ),
