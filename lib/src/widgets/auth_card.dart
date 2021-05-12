@@ -915,11 +915,11 @@ class _RecoverCardState extends State<_RecoverCard>
     return AnimatedTextFormField(
       controller: _nameController,
       width: width,
-      labelText: messages.usernameHint,
+      labelText: messages.emailHint,
       prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
       keyboardType: TextInputType.emailAddress,
       autocorrect: false,
-      autofillHints: [AutofillHints.username],
+      autofillHints: [AutofillHints.email],
       textInputAction: TextInputAction.done,
       onFieldSubmitted: (value) => _submit(),
       validator: widget.emailValidator,
