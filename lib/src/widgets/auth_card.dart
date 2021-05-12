@@ -603,7 +603,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       loadingController: _loadingController,
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.emailHint,
-      autofillHints: [AutofillHints.username],
+      autofillHints: [AutofillHints.email],
       prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
